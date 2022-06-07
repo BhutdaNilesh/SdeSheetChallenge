@@ -1,6 +1,7 @@
 #include <bits/stdc++.h> 
 #include <vector>
 
+// Naive Approach
 bool findTargetInMatrix(vector < vector < int >> & mat, int m, int n, int target) {
     // Write your code here.
     for(int i=0;i<m;i++){
@@ -10,3 +11,4 @@ bool findTargetInMatrix(vector < vector < int >> & mat, int m, int n, int target
     }
     return false;
 }
+
