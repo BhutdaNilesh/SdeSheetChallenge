@@ -29,20 +29,33 @@ public:
         // }
         // return dp[0][0];
 
-        int n = arr.size();
-        vector<int>next(n+1,0), curr(n+1,0);
+        // int n = arr.size();
+        // vector<int>next(n+1,0), curr(n+1,0);
 
-        for(int ind=n-1;ind>=0;ind--){
-            for(int prevInd=ind-1;prevInd>=-1;prevInd--){
-                int len = 0 + next[prevInd+1];
-                if(prevInd==-1 || arr[ind]>arr[prevInd]){
-                    len = max(len, 1+ next[ind+1]);
-                }
-                curr[prevInd+1] = len;
+        // for(int ind=n-1;ind>=0;ind--){
+        //     for(int prevInd=ind-1;prevInd>=-1;prevInd--){
+        //         int len = 0 + next[prevInd+1];
+        //         if(prevInd==-1 || arr[ind]>arr[prevInd]){
+        //             len = max(len, 1+ next[ind+1]);
+        //         }
+        //         curr[prevInd+1] = len;
+        //     }
+        //     next = curr;
+        // }
+        // return next[0];
+
+        // Binary Search Solution
+        vector<int>temp;
+        temp.push_back(arr[0]);
+        for(int i=1;i<n;i++){
+            if(arr[i]>temp.back()){
+                temp.push_back(arr[i]);
+            }else{
+                int ind = lower_bound(temp.begin(),temp.end(), arr[i]) - temp.begin();
+                temp[ind] = arr[i];
             }
-            next = curr;
         }
-        return next[0];
+        return temp.size();
         
     }
 };
