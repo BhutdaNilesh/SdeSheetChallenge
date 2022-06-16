@@ -59,3 +59,49 @@ TreeNode<int>* preOrderTree(vector<int> &preorder){
 
 
 // Better using property of BST
+
+
+/*************************************************************
+
+    Following is the Binary Tree node structure
+
+    template <typename T>
+
+    class TreeNode{
+    public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+        ~TreeNode() {
+            if (left){
+                delete left;
+            }
+            if (right){
+                delete right;
+            }
+        }
+    };
+
+*************************************************************/
+TreeNode<int>* construct(vector<int>& pre, int& i, int bound){
+    if(i==pre.size() || pre[i]>bound) return NULL;
+    TreeNode<int>* root = new TreeNode<int>(pre[i]);
+    i++;
+    root->left = construct(pre, i, root->data);
+    root->right = construct(pre, i, bound);
+    return root;
+}
+
+TreeNode<int>* preOrderTree(vector<int> &pre){
+    // Write your code here.
+    
+    int i=0;
+    return construct(pre, i, 1e9);
+    
+}
