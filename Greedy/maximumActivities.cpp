@@ -19,7 +19,7 @@ int maximumActivities(vector<int> &start, vector<int> &finish) {
     int laststart = res[0].second;
     int cnt=1;
     for(int i=1;i<n;i++){
-        if(res[i].second>=lastend && laststart<res[i].second){
+        if(res[i].second>=lastend){
             cnt++;
             lastend = res[i].first;
             laststart = res[i].second;
