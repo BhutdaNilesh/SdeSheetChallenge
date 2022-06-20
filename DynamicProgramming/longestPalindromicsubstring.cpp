@@ -36,3 +36,44 @@ string longestPalinSubstring(string s)
     }
     return ans;
 }
+
+
+
+
+
+#include<bits/stdc++.h>
+string longestPalinSubstring(string s)
+{
+    int n = s.size();
+    vector<vector<int>> dp(n,vector<int> (n,0));
+    int maxi = 0;
+    int start=0;
+    
+    for(int i=0 ;i<n; i++) dp[i][i] = 1;
+    
+    for(int i=1; i<n; i++){
+        for(int j= 0; j<n-i; j++){
+            
+            if(s[i+j] == s[j]){
+                if(i == 1){
+                    dp[j][i+j] = 1;
+                    if(maxi < i){
+                        start = j;
+                        maxi = i;
+                    }
+                }
+                else if(dp[j+1][i+j-1] == 1){
+                    dp[j][i+j] = 1;
+                    if(maxi< i){
+                        start = j;
+                        maxi = i;
+                    }
+                }
+            }
+        }
+    }
+    
+
+
+    return s.substr(start, maxi+1);
+}
