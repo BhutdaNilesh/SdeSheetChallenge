@@ -31,3 +31,43 @@ int cutLogs(int k, int n)
     }
     return dp[k][n];
 }
+
+
+// Optimised
+
+#include<bits/stdc++.h>
+int solve(int k, int n, vector<vector<int>>& dp){
+    
+    if(k==1) return n;
+    else if(n==0 || n==1) return n;
+    
+    if(dp[k][n]!=-1) return dp[k][n];
+    int mini = 1e9;
+    int low = 1;
+    int high = n;
+    while(low<=high){
+        int mid = low + (high-low)/2;
+        int left = solve(k-1, mid-1,dp);
+        int right = solve(k, n-mid, dp);
+        
+        int val = max(left, right);
+        if(left>right){
+            high = mid-1;
+        }else{
+            low = mid+1;
+        }
+        mini = min(mini, val);
+    }
+    return dp[k][n] = mini+1;
+}
+
+int cutLogs(int k, int n)
+{
+    // Write your code here.
+    
+    // it is similar problem to egg drop
+    
+    vector<vector<int>>dp(k+1, vector<int>(n+1,-1));
+    
+    return solve(k,n,dp);
+}
