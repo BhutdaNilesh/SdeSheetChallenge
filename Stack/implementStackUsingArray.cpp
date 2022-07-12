@@ -12,48 +12,34 @@ public:
     }
 
     void push(int num) {
-        if(size - topp != 1) {
-            topp++;
-            arr[topp] = num;
+        if(topp-1!=size){
+            arr[++topp]=num;
         }
     }
 
     int pop() {
-        if(topp != -1) {
-            int x = arr[topp];
-            topp--;
-            return x;
-        }
-        else {
-            return -1;
-        }
+       if(topp!=-1){
+           int x = arr[topp];
+           topp--;
+           return x;
+       }else{
+           return -1;
+       }
     }
     
     int top() {
-        if(topp != -1) {
-            int x = arr[topp];
-            return x;
-        }
-        else {
+        if(topp!=-1){
+            return arr[topp];
+        }else{
             return -1;
         }
     }
     
     int isEmpty() {
-        if(topp == -1) {
-            return 1;
-        }
-        else {
-            return 0;
-        }
+        return topp==-1;
     }
     
     int isFull() {
-        if(size - topp == 1) {
-            return 1;
-        }
-        else {
-            return 0;
-        }
+        return (topp-1)==size;
     }
 };
